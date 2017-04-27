@@ -1,9 +1,9 @@
 [package]
 name = "float_extras"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["yjh0502 <yjh0502@gmail.com>"]
 
-description = "extra floating-point mach functions from c math library"
+description = "Extra floating-point math functions from C math library."
 repository = "https://github.com/yjh0502/float_extras"
 
 license = "Apache-2.0"
