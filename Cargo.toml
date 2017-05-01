@@ -9,7 +9,7 @@ description = "Extra floating-point math functions from C math library."
 repository = "https://github.com/yjh0502/float_extras"
 documentation = "https://docs.rs/float_extras"
 
-keywords = ["math", "cmath", "frexp", "ldexp", "modf", "ilogb", "logb", "scalbn", "erf", "erfc", "tgamma", "lgamma", "fmod", "lround", "remainder", "remquo", "copysign", "nextafter", "fdim", "fma"]
+keywords = ["math", "cmath"]
 
 [dependencies]
 libc = "0.2"
