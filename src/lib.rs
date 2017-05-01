@@ -38,55 +38,56 @@ pub mod f64 {
     use libc::c_int;
     use super::cmath;
 
-    /// These functions are used to split the number x into a normalized fraction and an exponent
+    /// frexp is used to split the number x into a normalized fraction and an exponent
     /// which is stored in exp.
     pub fn frexp(x: f64) -> (f64, isize) {
         let mut n: c_int = 0;
         let f = unsafe { cmath::frexp(x, &mut n) };
         (f, n as isize)
     }
-    /// These functions return the result of multiplying the floating-point number x by 2 raised to
+    /// ldexp returns the result of multiplying the floating-point number x by 2 raised to
     /// the power exp.
-    pub fn ldexp(x: f64, n: isize) -> f64 {
-        unsafe { cmath::ldexp(x, n as i32) }
+    pub fn ldexp(x: f64, exp: isize) -> f64 {
+        unsafe { cmath::ldexp(x, exp as i32) }
     }
-    /// These  functions  break  the  argument  x into an integral part and a fractional part, each
+    /// modf breaks the argument x into an integral part and a fractional part, each
     /// of which has the same sign as x.
     pub fn modf(x: f64) -> (f64, f64) {
         let mut i: f64 = 0.;
         let f = unsafe { cmath::modf(x, &mut i) };
         (i, f)
     }
-    /// These  functions  return  the  exponent  part  of their argument as a signed integer.
+    /// iligb returns the exponent part of their argument as a signed integer.
     pub fn ilogb(n: f64) -> isize {
         (unsafe { cmath::ilogb(n) }) as isize
     }
-    /// These  functions  extract  the  exponent  from  the  internal  floating-point
+    /// logb extracts the exponent from the internal floating-point
     /// representation of x and return it as a floating-point value.
-    pub fn logb(n: f64) -> f64 {
-        unsafe { cmath::logb(n) }
+    pub fn logb(x: f64) -> f64 {
+        unsafe { cmath::logb(x) }
     }
-    /// These functions multiply their first argument x by FLT_RADIX (probably 2) to the power of
+    /// scalbn multiplies their first argument x by FLT_RADIX (probably 2) to the power of
     /// exp, that is:
     /// ```text
     /// x * FLT_RADIX ** exp
     /// ```
-    pub fn scalbn(x: f64, n: isize) -> f64 {
-        unsafe { cmath::scalbn(x, n as c_int) }
+    pub fn scalbn(x: f64, exp: isize) -> f64 {
+        unsafe { cmath::scalbn(x, exp as c_int) }
     }
 
-    /// These functions return the error function of x, defined as
+    /// erf returns the error function of x, defined as
     /// ```text
     /// erf(x) = 2/sqrt(pi)* integral from 0 to x of exp(-t*t) dt
     /// ```
-    pub fn erf(n: f64) -> f64 {
-        unsafe { cmath::erf(n) }
+    pub fn erf(x: f64) -> f64 {
+        unsafe { cmath::erf(x) }
     }
-    /// These functions return the complementary error function of x, that is, 1.0 - erf(x).
-    pub fn erfc(n: f64) -> f64 {
-        unsafe { cmath::erfc(n) }
+    /// erfc returns the complementary error function of x, that is, 1.0 - erf(x).
+    pub fn erfc(x: f64) -> f64 {
+        unsafe { cmath::erfc(x) }
     }
-    /// These functions calculate the Gamma function of x.
+
+    /// tgamma calculates the Gamma function of x.
     ///
     /// The Gamma function is defined by
     ///
@@ -110,53 +111,53 @@ pub mod f64 {
     /// ```text
     /// Gamma(x) * Gamma(1 - x) = PI / sin(PI * x)
     /// ```
-    pub fn tgamma(n: f64) -> f64 {
-        unsafe { cmath::tgamma(n) }
+    pub fn tgamma(x: f64) -> f64 {
+        unsafe { cmath::tgamma(x) }
     }
-    /// These functions return the natural logarithm of the absolute value of the Gamma function.
-    pub fn lgamma(n: f64) -> f64 {
-        unsafe { cmath::lgamma(n) }
+    /// lgamma returns the natural logarithm of the absolute value of the Gamma function.
+    pub fn lgamma(x: f64) -> f64 {
+        unsafe { cmath::lgamma(x) }
     }
 
-    /// These  functions  compute the floating-point remainder of dividing x by y.  The return
+    /// fmod computes the floating-point remainder of dividing x by y.  The return
     /// value is x - n * y, where n is the quotient of x / y, rounded toward zero to an integer.
-    pub fn fmod(a: f64, b: f64) -> f64 {
-        unsafe { cmath::fmod(a, b) }
+    pub fn fmod(x: f64, y: f64) -> f64 {
+        unsafe { cmath::fmod(x, y) }
     }
-    /// These functions round their argument to the nearest integer value, rounding away from zero.
+    /// lround rounds their argument to the nearest integer value, rounding away from zero.
     pub fn lround(x: f64) -> isize {
         (unsafe { cmath::lround(x) }) as isize
     }
-    /// These  functions compute the remainder of dividing x by y. The return value is x-n*y, where
+    /// remainder compute the remainder of dividing x by y. The return value is x-n*y, where
     /// n is the value x / y, rounded to the nearest integer. If the absolute value of x-n*y is
     /// 0.5, n is chosen to be even.
-    pub fn remainder(a: f64, b: f64) -> f64 {
-        unsafe { cmath::remainder(a, b) }
+    pub fn remainder(x: f64, y: f64) -> f64 {
+        unsafe { cmath::remainder(x, y) }
     }
-    /// These functions compute the remainder and part of the quotient upon division of x by y.
+    /// remquo computes the remainder and part of the quotient upon division of x by y.
     pub fn remquo(x: f64, y: f64) -> (isize, f64) {
         let mut quot: c_int = 0;
         let rem = unsafe { cmath::remquo(x, y, &mut quot) };
         (quot as isize, rem)
     }
 
-    /// These functions return a value whose absolute value matches that of x, but whose sign bit
+    /// copysign returns a value whose absolute value matches that of x, but whose sign bit
     /// matches that of y.
     pub fn copysign(x: f64, y: f64) -> f64 {
         unsafe { cmath::copysign(x, y) }
     }
-    /// These functions return the next representable floating-point value following x in the
-    /// direction of y.  If y is less than x, these functions will return the largest representable
+    /// nextafter returns the next representable floating-point value following x in the
+    /// direction of y. If y is less than x, these functions will return the largest representable
     /// number less than x.
     pub fn nextafter(x: f64, y: f64) -> f64 {
         unsafe { cmath::nextafter(x, y) }
     }
 
-    /// These functions return the positive difference, max(x-y,0), between their arguments.
-    pub fn fdim(a: f64, b: f64) -> f64 {
-        unsafe { cmath::fdim(a, b) }
+    /// fdim returns the positive difference, max(x-y,0), between their arguments.
+    pub fn fdim(x: f64, y: f64) -> f64 {
+        unsafe { cmath::fdim(x, y) }
     }
-    /// These functions compute x * y + z.  The result is rounded as one ternary operation
+    /// fma computes x * y + z. The result is rounded as one ternary operation
     /// according to the current rounding mode.
     pub fn fma(x: f64, y: f64, z: f64) -> f64 {
         unsafe { cmath::fma(x, y, z) }
