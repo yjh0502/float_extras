@@ -1,15 +1,23 @@
 [package]
 name = "float_extras"
+
 version = "0.1.4"
 authors = ["yjh0502 <yjh0502@gmail.com>"]
 
 license = "Apache-2.0"
+license-file = "LICENSE"
 
 description = "Extra floating-point math functions from C math library."
+homepage = "https://github.com/yjh0502/float_extras"
 repository = "https://github.com/yjh0502/float_extras"
 documentation = "https://docs.rs/float_extras"
 
 keywords = ["math", "cmath"]
+categories = ["science"]
 
 [dependencies]
 libc = "0.2"
+
+[badges]
+travis-ci = { repository = "https://github.com/yjh0502/float_extras" }
+
