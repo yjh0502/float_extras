@@ -6,7 +6,6 @@ edition = "2024"
 authors = ["yjh0502 <yjh0502@gmail.com>"]
 
 license = "Apache-2.0"
-license-file = "LICENSE"
 
 description = "Extra floating-point math functions from C math library."
 homepage = "https://github.com/yjh0502/float_extras"
