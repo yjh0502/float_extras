@@ -35,8 +35,8 @@ mod cmath {
 }
 
 pub mod f64 {
-    use libc::c_int;
     use super::cmath;
+    use libc::c_int;
 
     /// frexp is used to split the number x into a normalized fraction and an exponent
     /// which is stored in exp.
