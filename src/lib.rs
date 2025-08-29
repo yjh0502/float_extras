@@ -4,8 +4,8 @@ extern crate libc;
 mod cmath {
     use libc::{c_double, c_int};
 
-    #[link_name = "m"]
-    extern "C" {
+    #[link(name = "m")]
+    unsafe extern "C" {
         pub fn frexp(n: c_double, value: &mut c_int) -> c_double;
         pub fn ldexp(x: c_double, n: c_int) -> c_double;
         pub fn modf(x: c_double, iptr: &mut c_double) -> c_double;
@@ -35,8 +35,8 @@ mod cmath {
 }
 
 pub mod f64 {
-    use libc::c_int;
     use super::cmath;
+    use libc::c_int;
 
     /// frexp is used to split the number x into a normalized fraction and an exponent
     /// which is stored in exp.
